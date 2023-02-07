@@ -1,0 +1,10 @@
+.application-card {
+  border: 0.5px solid #3a3a3a;
+  border-radius: 20px;
+}
+.application-card-separator {
+  border-bottom: 0.5px solid #3a3a3a;
+}
+.application-card > span {
+  font-weight: 500;
+}

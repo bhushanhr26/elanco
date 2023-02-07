@@ -1,0 +1,10 @@
+.section-one {
+  border: 0.5px solid #323232;
+}
+.rawdata-card {
+  border: 0.5px solid #3b3939;
+  border-radius: 10px;
+}
+.cursor-pointer {
+  cursor: pointer;
+}
