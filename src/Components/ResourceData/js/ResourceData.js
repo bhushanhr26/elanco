@@ -2,33 +2,38 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { baseURL } from "../../../Backend";
-import ApplicationCard from "../../Application-card/js/ApplicationCard";
-import "../css/ApplicationData.css";
+import ResourceCard from "../../ResourceCard/js/ResourceCard";
+import "../css/ResourceData.css";
 
-export default function ApplicationData() {
+export default function ResourceData() {
   const [applicationData, setApplicationData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const params = useParams();
-  const getApplicationData = async () => {
+  const getResourceData = async () => {
+    setIsLoading(true);
     await axios
-      .get(`${baseURL}/applications/${params.appName}`)
+      .get(`${baseURL}/resources/${params.resName}`)
       .then((res) => {
-        console.log(res.data);
         setApplicationData(res.data);
+        setIsLoading(false);
       })
       .catch((err) => {
+        setIsLoading(true);
         throw new Error(err);
       });
   };
 
   useEffect(() => {
-    getApplicationData();
+    getResourceData();
   }, []);
   return (
     <div className="container">
       {applicationData?.map((data, i) => {
         return (
           <div key={i}>
-            <ApplicationCard
+            <ResourceCard
+              isLoading={isLoading}
+              setIsLoading={setIsLoading}
               ConsumedQuantity={data?.ConsumedQuantity}
               Cost={data?.Cost}
               Date={data?.Date}

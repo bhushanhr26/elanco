@@ -1,37 +1,33 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { baseURL } from "../../../Backend";
+import React from "react";
 import "../css/Main.css";
-import RawComponent from "../../RawComponent/js/RawComponent";
+import { useNavigate } from "react-router-dom";
 
 export default function Main() {
-  const [rawData, setRawData] = useState([]);
-  const [isLoading, setisLoading] = useState(false);
+  const navigate = useNavigate();
 
-  const getRawData = async () => {
-    await axios
-      .get(`${baseURL}/applications`)
-      .then((res) => {
-        setRawData(res.data);
-      })
-      .catch((err) => {
-        throw new Error(err);
-      });
-  };
-  useEffect(() => {
-    getRawData();
-  }, []);
   return (
-    <div className="container">
-      <h1>List of Application</h1>
-      <div className="section-one">
-        {rawData?.map((x, i) => {
+    <div className="container body">
+      <h1>What You want to see !!</h1>
+      <div className="section-one justify-content-evenly my-5">
+        <div
+          className="mx-5 text-center cursor-pointer"
+          onClick={() => navigate("/applications")}
+        >
+          Our Applications
+        </div>
+        <div
+          className="mx-5 text-center cursor-pointer"
+          onClick={() => navigate("/resources")}
+        >
+          Our Resources
+        </div>
+        {/* {rawData?.map((x, i) => {
           return (
             <div key={i}>
               <RawComponent elements={x} keys={i} />
             </div>
           );
-        })}
+        })} */}
       </div>
     </div>
   );
